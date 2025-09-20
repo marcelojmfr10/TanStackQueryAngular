@@ -20,7 +20,7 @@ export const getIssueCommentsByNumber = async (issueNumber: string): Promise<Git
     if (!resp.ok) throw "Can't load issues";
 
     const issues: GitHubIssue[] = await resp.json();
-    console.log(issues);
+    // console.log(issues);
     return issues;
 
   } catch (error) {
