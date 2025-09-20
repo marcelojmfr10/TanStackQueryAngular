@@ -8,7 +8,7 @@ const GITHUB_TOKEN = environment.gitHubToken;
 
 export const getLabels = async (): Promise<GitHubLabel[]> => {
 
-  await sleep(1500);
+  // await sleep(1500);
 
   try {
 
