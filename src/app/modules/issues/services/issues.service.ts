@@ -4,10 +4,9 @@ import { getIssues, getLabels } from '../actions';
 import { State } from '../interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IssuesService {
-
   selectedState = signal<State>(State.All);
   selectedLabels = signal(new Set<string>());
 
@@ -17,10 +16,13 @@ export class IssuesService {
   }));
 
   issuesQuery = injectQuery(() => ({
-    queryKey: ['issues', {
-      state: this.selectedState(),
-      selectedLabels: [...this.selectedLabels()]
-    }],
+    queryKey: [
+      'issues',
+      {
+        state: this.selectedState(),
+        selectedLabels: [...this.selectedLabels()],
+      },
+    ],
     queryFn: () => getIssues(this.selectedState(), [...this.selectedLabels()]),
   }));
 
@@ -30,7 +32,7 @@ export class IssuesService {
 
   toggleLabel(label: string) {
     const labels = this.selectedLabels();
-    if(labels.has(label)) {
+    if (labels.has(label)) {
       labels.delete(label);
     } else {
       labels.add(label);
@@ -38,6 +40,4 @@ export class IssuesService {
 
     this.selectedLabels.set(new Set(labels));
   }
-
-
 }

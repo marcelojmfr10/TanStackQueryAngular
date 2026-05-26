@@ -4,10 +4,9 @@ import { getIssueByNumber, getIssueCommentsByNumber } from '../actions';
 import { GitHubIssue } from '../interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IssueService {
-
   private issueNumber = signal<string | null>(null);
   private queryClient = inject(QueryClient);
 
@@ -21,7 +20,7 @@ export class IssueService {
   issueCommentsQuery = injectQuery(() => ({
     queryKey: ['issue', this.issueNumber(), 'comments'],
     queryFn: () => getIssueCommentsByNumber(this.issueNumber()!),
-    enabled: this.issueNumber() !== null
+    enabled: this.issueNumber() !== null,
   }));
 
   setIssueNumber(issueId: string) {
@@ -41,5 +40,4 @@ export class IssueService {
       updatedAt: Date.now() + 1000 * 60,
     });
   }
-
 }

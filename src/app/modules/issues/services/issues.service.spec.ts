@@ -1,10 +1,12 @@
-import { TestBed } from "@angular/core/testing";
-import { IssuesService } from "./issues.service";
-import { provideQueryClient, QueryClient } from "@tanstack/angular-query-experimental";
-import { State } from "../interfaces";
+import { TestBed } from '@angular/core/testing';
+import { IssuesService } from './issues.service';
+import {
+  provideQueryClient,
+  QueryClient,
+} from '@tanstack/angular-query-experimental';
+import { State } from '../interfaces';
 
 describe('IssuesService', () => {
-
   let service: IssuesService;
   const queryClient = new QueryClient();
 
@@ -13,9 +15,7 @@ describe('IssuesService', () => {
       teardown: {
         destroyAfterEach: false,
       },
-      providers: [
-        provideQueryClient(queryClient)
-      ]
+      providers: [provideQueryClient(queryClient)],
     });
     service = TestBed.inject(IssuesService);
   });
@@ -70,11 +70,8 @@ describe('IssuesService', () => {
 
     const { data } = await service.issuesQuery.refetch();
     data?.forEach((issue) => {
-      const hasLabel = issue.labels.some(l => l.name === label);
+      const hasLabel = issue.labels.some((l) => l.name === label);
       expect(hasLabel).toBeTrue();
     });
   });
-
 });
-
-
